@@ -11,6 +11,7 @@ pipeline {
   stages {
     stage("Clone_compose_file") {
       steps {
+        sh "rm -rf *"
         sh "git clone ${url}"
       }
   }
