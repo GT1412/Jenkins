@@ -1,0 +1,25 @@
+pipeline {
+  agent any 
+  stages {
+    stage ("Shutdown") {
+      steps {
+      build " job names"
+         }
+       }
+      stage ("compile") {
+      steps {
+      build " job name"
+         }
+       }
+      stage ("deploy-dev") {
+      steps {
+      build " job name "
+         }
+       }
+      stage ("deploy-qa") {
+      steps {
+      build " jobename"
+         }
+       }
+}
+}
