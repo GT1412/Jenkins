@@ -1,0 +1,34 @@
+pipeline {
+          agent {
+                label {
+                    label "built-in"
+                    CustomWorkspace "/mnt/projects"
+                        }
+                  }
+enviroment {
+url = "https://github.com/gauravtalodhikar/game-of-life.git"
+dev-env = "10.10.1.24"
+}
+stages {
+stage("git clone")
+{
+steps {
+sh "rm -rf *"
+sh "git clone ${url}"
+}
+}
+stage ("build projects"){
+steps{
+sh "rm -rf /home/gauravt/.m2"
+sh "cd game-of-life && mvn clean install"
+}
+}
+stage ("copy Wars"){
+steps {
+sh "cp game-of-life/game-of-life-web/target/game-of-life.war /mnt/wars"
+}
+}
+stage ("copy to dev-env"){
+steps {
+sh "scp -r /mnt/wars/game-of-life gauravt@{dev-env}"
+}}}}}
