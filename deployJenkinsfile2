@@ -1,0 +1,22 @@
+pipeline {
+  agent {
+    lable {
+      label "dev-env"
+      customWorkspace "/mnt/project0000"
+    }
+  }
+  environment {
+    url = "git-url of docker compose file"
+  }
+  stages {
+    stage("Clone_compose_file") {
+      steps {
+        sh "git clone ${url}"
+      }
+  }
+    stage ("RUN_COMPOSE_FILE") {
+    steps {
+      sh "cd my-project && sudo docker-compose up -d"
+    }
+  }
+}
