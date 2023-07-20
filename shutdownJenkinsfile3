@@ -1,0 +1,27 @@
+pipeline {
+  agent {
+    lable {
+      label "dev-env"
+      customWorkspace "/mnt/project"
+    }
+  }
+ stages {
+    stage ("STOP_COMPOSE_dev") {
+    steps {
+      sh "cd my-project && sudo docker-compose down -v"
+      sh "sudo docker system prune -a -f"
+    }
+  }
+  stage ("STOP_COMPOSE_qa") {
+  agent { 
+   lable {
+     lable "qa-env"
+     customWorkspace "/mnt/project"
+  }
+  }
+    steps {
+      sh "cd my-project && sudo docker-compose down -v"
+      sh "sudo docker system prune -a -f"
+    }
+}
+}
