@@ -1,0 +1,39 @@
+#Running the job on multiple nodes and perform the task using custom workspace
+
+pipeline {
+agent{
+label{
+		label "built-in"
+		customWorkspace "/data/pipeline"
+}
+}
+
+stages {
+
+		stage ("on master"){
+			steps {
+					sh "yum install tree -y"
+			}
+		
+		}
+		
+		stage ("on slave"){
+		agent {
+		    label{
+		
+				label "QA"
+				customWorkspace "/home/ec2-user/slave"
+		    }
+		
+		}
+		
+		steps {
+				sh "sudo yum install tree -y"
+		
+		}
+		
+		}
+
+}
+
+}
