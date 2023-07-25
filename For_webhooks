@@ -1,0 +1,18 @@
+#Inside Create Job
+-->
+Source_code Management  -> Repo URL -->Credentials
+
+Branch specifier  --> (*/main )
+
+Build Trigger  --> GitHub hook trigger with git SCM polling
+
+Build Enviroment  --> Delete Workspace before build starts 
+
+Execute Shell -->
+#JenkinsFile
+
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo cp -r index.html /var/www/html
+sudo systemctl restart httpd
+sudo systemctl status httpd
